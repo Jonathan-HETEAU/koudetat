@@ -32,6 +32,8 @@ button:hover {
 
 /* General Styling for Menu Screens */
 [data-menu] {
+	background-color: #000a19;
+	color: white;
 }
 
 /**
@@ -121,6 +123,7 @@ button:hover {
 
 /* Quick Menu Style */
 [data-ui="quick-menu"] {
+	color: white;
 }
 
 /* Quick Menu Buttons Style */

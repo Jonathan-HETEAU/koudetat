@@ -259,6 +259,10 @@ let script = {
           Text: "J'ai une boîte qui fonctionne, et j'aimerais la faire Scaler ",
           Do: "jump Scale",
         },
+        Rien: {
+          Text: "Rien, merci.",
+          Do: "jump Formations",
+        },
       },
     },
   ],
