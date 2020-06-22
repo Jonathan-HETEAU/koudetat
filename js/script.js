@@ -26,10 +26,10 @@ let messages = {
 
 // Define the notifications used in the game
 let notifications = {
-  Welcome: {
-    title: "Welcome",
-    body: "This is the Monogatari VN Engine",
-    icon: "",
+  Disclaimer: {
+    title: "Avertissement!",
+    body: ` Bonjour, ce n'est pas un vrai site Koudetat ! ! ! C'est le prototype d'une idée que je voulais montrer au membre de The Family et  Koudetat. En fait, je suis Jonathan et les propos sont les miens et non celles des personnes représentées, même si j'ai essayé de m'y approcher. \n https://www.linkedin.com/in/jonathan-heteau-35b160a6/`,
+    icon: "img/moi.jpeg",
   },
 };
 
@@ -43,7 +43,9 @@ const music = {};
 const voice = {};
 
 // Define the sounds used in the game.
-const sound = {};
+const sound = {
+  Koudetat: "koudetat.mp3",
+};
 
 // Define the videos used in the game.
 const videos = {
@@ -78,7 +80,7 @@ const characters = {
   },
   ouss: {
     Name: "Oussama",
-    Color: "#00bfff",
+    Color: "#00269A",
     Directory: "Oussama", // Optional*
     Images: {
       // Images Identifier for the "Show" statement.
@@ -104,7 +106,7 @@ const characters = {
 
 let script = {
   // The game starts here.
-  Start: ["jump Sex"],
+  Start: ["notify Disclaimer", "jump Sex"],
   Sex: [
     "scene Sex",
     {
@@ -230,7 +232,55 @@ let script = {
       },
     },
   ],
-  Mindset: [],
+  Mindset: [
+    "scene rgb(0,38,154)",
+    "show ouss Attend left ",
+    {
+      Conditional: {
+        Condition: function () {
+          return storage.player.sex == "FEMME";
+        },
+        True: "ouss Bonjour {{player.Name}}",
+        False: "ouss Hey Dude, bienvenue",
+      },
+    },
+    "ouss Que veux-tu savoir ? ",
+    {
+      Choice: {
+        Covid: {
+          Text: "Le Covid-19 me fait peur !",
+          Do: "jump Covid",
+        },
+        Entrepreneur: {
+          Text: "J'aimerais créer ma propre entreprise",
+          Do: "jump Entrepreneur",
+        },
+        Scale: {
+          Text: "J'ai une boîte qui fonctionne, et j'aimerais la faire Scaler ",
+          Do: "jump Scale",
+        },
+      },
+    },
+  ],
+  Scale: [
+    "show ouss Scale left ",
+    "ouss Avant, je pensais que les boîtes de service ne pouvaient pas être à l'échelle. J'avais tort.",
+    "ouss Maintenant je sais que toute entreprise a une partie qui scale.",
+    "jump Mindset",
+  ],
+  Entrepreneur: [
+    "show ouss Stop left ",
+    "ouss C'est un environnement difficile où vous réussissez rarement, mais quand vous y parvenez",
+    "show ouss Calme left ",
+    "ouss ...  c'est plus haut que ce qu'on imaginait.",
+    "jump Mindset",
+  ],
+  Covid: [
+    "show ouss Calme left ",
+    "ouss Je comprends, c'est un moment difficile où l'incertitude est grande.",
+    "ouss <a href='https://www.youtube.com/watch?v=GoP1060aKY0'>Regarde cette série de vidéos spéciales de Covid. tu y trouveras des conseils utiles.</a> ",
+    "jump Mindset",
+  ],
   GoldUp: [
     {
       Conditional: {
@@ -256,5 +306,14 @@ let script = {
     "alice Tu as choisi d'investir en toi et c'est super car on a trop besoin de meuf comme toi qui déchire dans l'entreprenariat..",
     "jump Formations",
   ],
-  BreakTheGame: [],
+  BreakTheGame: [
+    "scene Koudetat",
+    "show valentin Presentation center",
+    "valentin Super ! Depuis que je suis chez Koudetat, c'est mon objectif.",
+    "valentin Cassez le Game!",
+    "vibrate 14000",
+    "play sound Koudetat",
+    "wait 14000",
+    "jump Formations",
+  ],
 };
